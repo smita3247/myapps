@@ -1,11 +1,27 @@
-var express=require('express');
-var path=require('path');
-const app=express();
-//Configure public folder as static folder  to express module
-var staticFolder=express.static(path.join(__dirname,"public"));
-app.use(staticFolder);
-app.get("/", (req, res)=>{
-    res.sendFile(path.join(__dirname + '/index.html'));
-});
-app.listen(9000);
-console.log("Website is being hosted on port no 9000");
+ // inbuilt package to build simple http web site
+//use some libarry to create a server
+//Write some lines of code to generate html output
+ var express=require('express');   // import library
+ var app=express();                // create global object
+
+  //define Http handling logic for each type of HTTP request
+
+  var onDefault=function(req, res){
+    res.send("<h1> Transflower Learning Pvt. Ltd.   </h1>" +
+             "<hr/>"+
+             "<ol>" +
+             "<li> Mentoring for skill building</li>"+
+             "<li> Workshops</li>"+
+             "<li> Online Courses</li>"+
+             "<li> Dac Courses</li>"
+    );
+  };
+
+  var onAboutUs=function(req,res){
+        res.send("Chief Mentor: Ravi Tambade ");
+  };
+  // configure http incomming request handling  logic
+  app.get("/",onDefault);
+  app.get("/aboutus",onAboutUs)
+  app.listen(8081);  // contionusly wait fro client request
+  console.log("Server is listening on port 8081");
